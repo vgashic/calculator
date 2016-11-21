@@ -1,2 +1,48 @@
-.testing {
-  width: 71.42857%; }
+@font-face {
+  font-family: "DSEG7 Classic";
+  src: url("../fonts/DSEG7Classic-Bold.woff"); }
+
+p {
+  margin: 0; }
+
+.bg-num,
+.bg-dot,
+.fg-num,
+.fg-dot,
+.bg-minus,
+.fg-minus {
+  font-size: 2rem; }
+
+#display {
+  display: block;
+  position: relative;
+  max-width: 40%;
+  min-height: 3rem;
+  background-color: #aaa; }
+
+#display-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "DSEG7 Classic";
+  font-size: 2rem;
+  color: #999; }
+  #display-bg p {
+    text-align: center;
+    line-height: 3rem;
+    font-size: 0; }
+
+#display-numbers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "DSEG7 Classic";
+  font-size: 2rem;
+  color: #111; }
+  #display-numbers p {
+    text-align: center;
+    line-height: 3rem;
+    font-size: 0; }
+
+.invisible {
+  visibility: hidden; }

@@ -1,0 +1,60 @@
+$displayBackground: #aaa;
+$displayBackgroundNumbers: #999;
+$displayNumbers: #111;
+@font-face {
+	font-family: "DSEG7 Classic";
+	src: url("../fonts/DSEG7Classic-Bold.woff");
+}
+
+p {
+	margin: 0;
+}
+
+.bg-num,
+.bg-dot,
+.fg-num,
+.fg-dot,
+.bg-minus,
+.fg-minus {
+	font-size: 2rem;
+}
+
+#display {
+	display: block;
+	position: relative;
+	max-width: 40%;
+	min-height: 3rem;
+	background-color: $displayBackground;
+}
+
+#display-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-family: "DSEG7 Classic";
+	font-size: 2rem;
+	color: $displayBackgroundNumbers;
+	p {
+		text-align: center;
+		line-height: 3rem;
+		font-size: 0;
+	}
+}
+
+#display-numbers {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-family: "DSEG7 Classic";
+	font-size: 2rem;
+	color: $displayNumbers;
+	p {
+		text-align: center;
+		line-height: 3rem;
+		font-size: 0;
+	}
+}
+
+.invisible {
+	visibility: hidden;
+}

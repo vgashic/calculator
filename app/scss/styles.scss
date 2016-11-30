@@ -1,9 +1,16 @@
 $displayBackground: #aaa;
 $displayBackgroundNumbers: #999;
 $displayNumbers: #111;
+$displayFont: DSEG;
+$smallFont: "DotMatrix";
 @font-face {
-	font-family: "DSEG7 Classic";
+	font-family: "DSEG";
 	src: url("../fonts/DSEG7Classic-Bold.woff");
+}
+
+@font-face {
+	font-family: DotMatrix;
+	src: url("../fonts/dotmatrixnormal.ttf");
 }
 
 p {
@@ -23,7 +30,7 @@ p {
 	display: block;
 	position: relative;
 	max-width: 40%;
-	min-height: 3rem;
+	min-height: 5rem;
 	background-color: $displayBackground;
 }
 
@@ -31,13 +38,11 @@ p {
 	position: absolute;
 	top: 0;
 	left: 0;
-	font-family: "DSEG7 Classic";
-	font-size: 2rem;
+	font-family: $displayFont;
+	font-size: 0;
 	color: $displayBackgroundNumbers;
-	p {
-		text-align: center;
-		line-height: 3rem;
-		font-size: 0;
+	span {
+		font-size: 2rem;
 	}
 }
 
@@ -45,7 +50,44 @@ p {
 	position: absolute;
 	top: 0;
 	left: 0;
-	font-family: "DSEG7 Classic";
+	font-family: $displayFont;
+	font-size: 0;
+	color: $displayNumbers;
+	span {
+		font-size: 2rem;
+	}
+}
+
+#small-display {
+	display: block;
+	position: relative;
+	top: 2rem;
+	margin-top: 2.5rem;
+	max-width: 40%;
+	min-height: 3rem;
+	font-size: 0;
+	background-color: $displayBackground;
+}
+
+#small-display-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-family: $smallFont;
+	font-size: 0;
+	color: $displayBackgroundNumbers;
+	span {
+		text-align: center;
+		line-height: 1rem;
+		font-size: 1rem;
+	}
+}
+
+#small-display-numbers {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-family: $smallFont;
 	font-size: 2rem;
 	color: $displayNumbers;
 	p {

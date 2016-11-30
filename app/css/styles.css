@@ -1,6 +1,10 @@
 @font-face {
-  font-family: "DSEG7 Classic";
+  font-family: "DSEG";
   src: url("../fonts/DSEG7Classic-Bold.woff"); }
+
+@font-face {
+  font-family: DotMatrix;
+  src: url("../fonts/dotmatrixnormal.ttf"); }
 
 p {
   margin: 0; }
@@ -17,29 +21,59 @@ p {
   display: block;
   position: relative;
   max-width: 40%;
-  min-height: 3rem;
+  min-height: 5rem;
   background-color: #aaa; }
 
 #display-bg {
   position: absolute;
   top: 0;
   left: 0;
-  font-family: "DSEG7 Classic";
-  font-size: 2rem;
+  font-family: DSEG;
+  font-size: 0;
   color: #999; }
-  #display-bg p {
-    text-align: center;
-    line-height: 3rem;
-    font-size: 0; }
+  #display-bg span {
+    font-size: 2rem; }
 
 #display-numbers {
   position: absolute;
   top: 0;
   left: 0;
-  font-family: "DSEG7 Classic";
+  font-family: DSEG;
+  font-size: 0;
+  color: #111; }
+  #display-numbers span {
+    font-size: 2rem; }
+
+#small-display {
+  display: block;
+  position: relative;
+  top: 2rem;
+  margin-top: 2.5rem;
+  max-width: 40%;
+  min-height: 3rem;
+  font-size: 0;
+  background-color: #aaa; }
+
+#small-display-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "DotMatrix";
+  font-size: 0;
+  color: #999; }
+  #small-display-bg span {
+    text-align: center;
+    line-height: 1rem;
+    font-size: 1rem; }
+
+#small-display-numbers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "DotMatrix";
   font-size: 2rem;
   color: #111; }
-  #display-numbers p {
+  #small-display-numbers p {
     text-align: center;
     line-height: 3rem;
     font-size: 0; }

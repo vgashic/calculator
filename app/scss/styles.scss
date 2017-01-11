@@ -3,6 +3,9 @@ $displayBackgroundNumbers: #999;
 $displayNumbers: #111;
 $displayFont: DSEG;
 $smallFont: "DotMatrix";
+$buttonColor: #333;
+$buttonTextColor: #eee;
+$calculatorColor: #555;
 @font-face {
 	font-family: "DSEG";
 	src: url("../fonts/DSEG7Classic-Bold.woff");
@@ -11,5 +14,35 @@ $smallFont: "DotMatrix";
 @font-face {
 	font-family: DotMatrix;
 	src: url("../fonts/dotmatrixnormal.ttf");
+}
+
+.calculator {
+	max-width: 300px;
+	background-color: $calculatorColor;
+}
+
+
+// button classes
+.btn {
+	display: inline-block;
+	min-width: 50px;
+	min-height: 50px;
+	margin: 5px;
+	color: $buttonTextColor;
+	background-color: $buttonColor;
+	border: none;
+	border-radius: 5px;
+}
+
+// display
+.display {
+	max-width: 280px;
+	min-height: 60px;
+	font-family: $displayFont;
+	background-color: $displayBackground
+}
+
+.display p {
+	text-align: right;
 }
 

@@ -5,3 +5,26 @@
 @font-face {
   font-family: DotMatrix;
   src: url("../fonts/dotmatrixnormal.ttf"); }
+
+.calculator {
+  max-width: 300px;
+  background-color: #555; }
+
+.btn {
+  display: inline-block;
+  min-width: 50px;
+  min-height: 50px;
+  margin: 5px;
+  color: #eee;
+  background-color: #333;
+  border: none;
+  border-radius: 5px; }
+
+.display {
+  max-width: 280px;
+  min-height: 60px;
+  font-family: DSEG;
+  background-color: #aaa; }
+
+.display p {
+  text-align: right; }

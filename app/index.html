@@ -19,40 +19,44 @@
 		</div>
 		<!-- .logo -->
 
-		<div class="display main-display">
-			<p>0</p>
-		</div>
-		<!-- .main-display -->
+		<div class="display">
+			<div class="main-display">
+				<p>0</p>
+			</div>
+			<!-- .main-display -->
 
-		<div class="display small-display">
-
+			<div class="small-display">
+				<p>0</p>
+			</div>
+			<!-- .small-display -->
 		</div>
-		<!-- .small-display -->
+		<!-- .display -->
+
 
 		<div class="keyboard">
 			<button class="btn btn-red">AC</button>
 			<button class="btn btn-red">CE</button>
-			<button class="btn">&divide;</button>
-			<button class="btn">x</button>
+			<button class="btn operator" data-calc="/">&divide;</button>
+			<button class="btn operator" data-calc="*">x</button>
 
-			<button class="btn">7</button>
-			<button class="btn">8</button>
-			<button class="btn">9</button>
-			<button class="btn">-</button>
+			<button class="btn digit" data-calc="7">7</button>
+			<button class="btn digit" data-calc="8">8</button>
+			<button class="btn digit" data-calc="9">9</button>
+			<button class="btn operator" data-calc="-">-</button>
 
-			<button class="btn">4</button>
-			<button class="btn">5</button>
-			<button class="btn">6</button>
-			<button class="btn">+</button>
+			<button class="btn digit" data-calc="4">4</button>
+			<button class="btn digit" data-calc="5">5</button>
+			<button class="btn digit" data-calc="6">6</button>
+			<button class="btn operator" data-calc="+">+</button>
 
-			<button class="btn">1</button>
-			<button class="btn">2</button>
-			<button class="btn">3</button>
+			<button class="btn digit" data-calc="1">1</button>
+			<button class="btn digit" data-calc="2">2</button>
+			<button class="btn digit" data-calc="3">3</button>
 
-			<button class="btn double-height">=</button>
+			<button class="btn double-height operator" data-calc="=">=</button>
 
-			<button class="btn double-width">0</button>
-			<button class="btn">.</button>
+			<button class="btn double-width digit" data-calc="0">0</button>
+			<button class="btn point">.</button>
 		</div>
 		<!-- .keyboard -->
 	</div>

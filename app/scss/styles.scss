@@ -16,6 +16,10 @@ $calculatorColor: #555;
 	src: url("../fonts/dotmatrixnormal.ttf");
 }
 
+* {
+	box-sizing: border-box;
+}
+
 .calculator {
 	max-width: 300px;
 	background-color: $calculatorColor;
@@ -27,22 +31,46 @@ $calculatorColor: #555;
 	display: inline-block;
 	min-width: 50px;
 	min-height: 50px;
+	max-width: 50px;
+	max-height: 50px;
 	margin: 5px;
+	font-size: 25px;
 	color: $buttonTextColor;
 	background-color: $buttonColor;
 	border: none;
 	border-radius: 5px;
+	outline: none;
+}
+
+.btn-red {
+	background-color: darkred;
+}
+
+.double-height {
+	position: absolute;
+	min-height: 110px;
+}
+
+.double-width {
+	min-width: 114px;
 }
 
 // display
 .display {
 	max-width: 280px;
 	min-height: 60px;
-	font-family: $displayFont;
-	background-color: $displayBackground
+	background-color: $displayBackground;
+	p {
+		text-align: right;
+	}
 }
 
-.display p {
-	text-align: right;
+.main-display {
+	font-family: $displayFont;
 }
+
+.small-display {
+	font-family: $smallFont;
+}
+
 

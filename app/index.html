@@ -20,12 +20,12 @@
 		<!-- .logo -->
 
 		<div class="display">
-			<div class="main-display">
+			<div id="main-display" class="main-display">
 				<p>0</p>
 			</div>
 			<!-- .main-display -->
 
-			<div class="small-display">
+			<div id="small-display" class="small-display">
 				<p>0</p>
 			</div>
 			<!-- .small-display -->
@@ -34,34 +34,34 @@
 
 
 		<div class="keyboard">
-			<button class="btn btn-red">AC</button>
-			<button class="btn btn-red">CE</button>
-			<button class="btn operator" data-calc="/">&divide;</button>
-			<button class="btn operator" data-calc="*">x</button>
+			<button class="btn btn-red" data-calc="clearAll" data-type="command">AC</button>
+			<button class="btn btn-red" data-calc="clearCurrent" data-type="command">CE</button>
+			<button class="btn" data-calc="/" data-type="operator">&divide;</button>
+			<button class="btn" data-calc="*" data-type="operator">x</button>
 
-			<button class="btn digit" data-calc="7">7</button>
-			<button class="btn digit" data-calc="8">8</button>
-			<button class="btn digit" data-calc="9">9</button>
-			<button class="btn operator" data-calc="-">-</button>
+			<button class="btn" data-calc="7" data-type="digit">7</button>
+			<button class="btn" data-calc="8" data-type="digit">8</button>
+			<button class="btn" data-calc="9" data-type="digit">9</button>
+			<button class="btn" data-calc="-" data-type="operator">-</button>
 
-			<button class="btn digit" data-calc="4">4</button>
-			<button class="btn digit" data-calc="5">5</button>
-			<button class="btn digit" data-calc="6">6</button>
-			<button class="btn operator" data-calc="+">+</button>
+			<button class="btn" data-calc="4" data-type="digit">4</button>
+			<button class="btn" data-calc="5" data-type="digit">5</button>
+			<button class="btn" data-calc="6" data-type="digit">6</button>
+			<button class="btn" data-calc="+" data-type="operator">+</button>
 
-			<button class="btn digit" data-calc="1">1</button>
-			<button class="btn digit" data-calc="2">2</button>
-			<button class="btn digit" data-calc="3">3</button>
+			<button class="btn" data-calc="1" data-type="digit">1</button>
+			<button class="btn" data-calc="2" data-type="digit">2</button>
+			<button class="btn" data-calc="3" data-type="digit">3</button>
 
-			<button class="btn double-height operator" data-calc="=">=</button>
+			<button class="btn double-height" data-calc="=" data-type="equals">=</button>
 
-			<button class="btn double-width digit" data-calc="0">0</button>
-			<button class="btn point">.</button>
+			<button class="btn double-width" data-calc="0" data-type="digit">0</button>
+			<button class="btn" data-calc="." data-type="point">.</button>
 		</div>
 		<!-- .keyboard -->
 	</div>
 	<!-- .calculator -->
-	<script src="js/bundle.js"></script>
+	<script src="js/scripts.js"></script>
 </body>
 
 </html>

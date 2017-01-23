@@ -24,175 +24,183 @@ var smallDisplayValue = smallDisplay.innerHTML;
 var keyPressed;
 var lastEntered;
 var lastEnteredType;
+var expressionToDisplay;
+var expressionToCalculate;
 
 
 function calculateExpression(expr) {
-	let result;
+    let result;
 
-	if (expr.toString().length <= mainDisplayLimit) {
-		result = eval(expr).toString();
-	} else {
-		// todo: implement display limit
-		result = "err";
-	}
+    if (expr.toString().length <= mainDisplayLimit) {
+        result = eval(expr).toString();
+    } else {
+        // todo: implement display limit
+        result = "err";
+    }
 
-	return result;
+    return result;
 }
 
 
 function digitPressed(digit) {
-	if (mainDisplay.innerHTML.replace(".", "").replace("-", "").length < mainDisplayLimit) {
-		if (lastEnteredType == "operator" || mainDisplay.innerHTML == "0" || lastEnteredType == "equals") {
-			mainDisplay.innerHTML = digit;
+    if (mainDisplay.innerHTML.replace(".", "").replace("-", "").length < mainDisplayLimit) {
+        if (lastEnteredType == "operator" || mainDisplay.innerHTML == "0" || lastEnteredType == "equals") {
+            mainDisplay.innerHTML = digit;
 
-			if (lastEnteredType == "equals") {
-				smallDisplay.innerHTML = "";
-			}
-		} else {
-			mainDisplay.innerHTML += digit;
-		}
+            if (lastEnteredType == "equals") {
+                smallDisplay.innerHTML = "";
+            }
+        } else {
+            mainDisplay.innerHTML += digit;
+        }
 
-		if (!(mainDisplay.innerHTML == "0" && digit == "0" && lastEntered == "0")) {
-			smallDisplay.innerHTML += digit;
-		}
-	}
+        if (!(mainDisplay.innerHTML == "0" && digit == "0" && lastEntered == "0")) {
+            smallDisplay.innerHTML += digit;
+        }
+    }
 }
 
 
 function operatorPressed(operator) {
-	if (lastEnteredType == "operator") {
-		smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -1);
-	}
+    if (lastEnteredType == "operator") {
+        smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -1);
+    }
 
-	// first calculate expression in small display
-	let currentValue = calculateExpression(smallDisplay.innerHTML);
+    // first calculate expression in small display
+    let currentValue = calculateExpression(smallDisplay.innerHTML);
 
-	// then write to screen
-	mainDisplay.innerHTML = currentValue;
-	smallDisplay.innerHTML += keyPressed;
+    // then write to screen
+    mainDisplay.innerHTML = currentValue;
+    smallDisplay.innerHTML += keyPressed;
 
-	hasDecimalPoint = false;
+    hasDecimalPoint = false;
 }
 
 
 function equalsPressed() {
-	if (lastEnteredType == "operator") {
-		smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -1);
-	}
+    if (lastEnteredType == "operator") {
+        smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -1);
+    }
 
-	let currentValue = calculateExpression(smallDisplay.innerHTML);
+    let currentValue = calculateExpression(smallDisplay.innerHTML);
 
-	mainDisplay.innerHTML = currentValue;
-	//smallDisplay.innerHTML = currentValue;
+    mainDisplay.innerHTML = currentValue;
+    //smallDisplay.innerHTML = currentValue;
 
-	hasDecimalPoint = false;
+    hasDecimalPoint = false;
 }
 
 
 
 function pointPressed() {
-	if (hasDecimalPoint) {
-		return;
-	} else {
-		if (lastEnteredType == "digit") {
-			mainDisplay.innerHTML += ".";
-			smallDisplay.innerHTML += ".";
-		} else {
-			mainDisplay.innerHTML = "0.";
-			smallDisplay.innerHTML = "0.";
-		}
+    if (hasDecimalPoint) {
+        return;
+    } else {
+        if (lastEnteredType == "digit") {
+            mainDisplay.innerHTML += ".";
+            smallDisplay.innerHTML += ".";
+        } else {
+            mainDisplay.innerHTML = "0.";
+            smallDisplay.innerHTML = "0.";
+        }
 
-		hasDecimalPoint = true;
-	}
+        hasDecimalPoint = true;
+    }
 
 }
 
 
 
 function commandPressed(cmd) {
-	switch (cmd) {
-		case "clearAll": {
-			mainDisplay.innerHTML = "0";
-			smallDisplay.innerHTML = "0";
-			newCalc = true;
-			hasDecimalPoint = false;
-			break;
-		}
-		case "clearCurrent": {
-			let numberOnDisplay = mainDisplay.innerHTML;
-			smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -numberOnDisplay.length);
+    switch (cmd) {
+        case "clearAll":
+            {
+                mainDisplay.innerHTML = "0";
+                smallDisplay.innerHTML = "0";
+                newCalc = true;
+                hasDecimalPoint = false;
+                break;
+            }
+        case "clearCurrent":
+            {
+                let numberOnDisplay = mainDisplay.innerHTML;
+                smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -numberOnDisplay.length);
 
-			mainDisplay.innerHTML = "0";
-			hasDecimalPoint = false;
-		}
-		default:
-			break;
-	}
+                mainDisplay.innerHTML = "0";
+                hasDecimalPoint = false;
+            }
+        default:
+            break;
+    }
 }
 
 
 
 function doCalcStuff(e) {
 
-	keyPressed = this.dataset.calc;
-	keyType = this.dataset.type;
+    keyPressed = this.dataset.calc;
+    keyType = this.dataset.type;
 
-	// console.log(this.dataset.calc);
-	if (newCalc) {
+    // console.log(this.dataset.calc);
+    if (newCalc) {
 
-		switch (keyType) {
+        switch (keyType) {
 
-			case "digit": {
-				mainDisplay.innerHTML = keyPressed;
-				smallDisplay.innerHTML = keyPressed;
-				break;
-			}
+            case "digit":
+                {
+                    mainDisplay.innerHTML = keyPressed;
+                    smallDisplay.innerHTML = keyPressed;
+                    break;
+                }
 
-			case "point": {
-				mainDisplay.innerHTML += keyPressed;
-				smallDisplay.innerHTML += keyPressed;
-				hasDecimalPoint = true;
-				break;
-			}
+            case "point":
+                {
+                    mainDisplay.innerHTML += keyPressed;
+                    smallDisplay.innerHTML += keyPressed;
+                    hasDecimalPoint = true;
+                    break;
+                }
 
-			case "operator": {
-				smallDisplay.innerHTML += keyPressed;
-				break;
-			}
+            case "operator":
+                {
+                    smallDisplay.innerHTML += keyPressed;
+                    break;
+                }
 
-			default: {
-				break;
-			}
+            default:
+                {
+                    break;
+                }
 
-		}
+        }
 
 
-		newCalc = false;
+        newCalc = false;
 
-	} else {
-		switch (keyType) {
-			case "digit":
-				digitPressed(keyPressed);
-				break;
-			case "operator":
-				operatorPressed(keyPressed);
-				break;
-			case "equals":
-				equalsPressed();
-				break;
-			case "point":
-				pointPressed();
-				break;
-			case "command":
-				commandPressed(keyPressed);
-				break;
-			default:
-				break;
-		}
-	}
+    } else {
+        switch (keyType) {
+            case "digit":
+                digitPressed(keyPressed);
+                break;
+            case "operator":
+                operatorPressed(keyPressed);
+                break;
+            case "equals":
+                equalsPressed();
+                break;
+            case "point":
+                pointPressed();
+                break;
+            case "command":
+                commandPressed(keyPressed);
+                break;
+            default:
+                break;
+        }
+    }
 
-	lastEntered = keyPressed;
-	lastEnteredType = keyType;
-	//console.log(lastEnteredType);
+    lastEntered = keyPressed;
+    lastEnteredType = keyType;
+    //console.log(lastEnteredType);
 
 }

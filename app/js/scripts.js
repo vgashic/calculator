@@ -1,3 +1,6 @@
+// display limits
+const mainDisplayLimit = 15;
+const smallDisplayLimit = 25;
 
 // get all buttons into array
 const buttons = [...document.querySelectorAll("button")];
@@ -24,8 +27,12 @@ var lastEnteredType;
 
 
 function digitPressed(digit) {
-	if (lastEnteredType == "operator" || mainDisplay.innerHTML == "0") {
+	if (lastEnteredType == "operator" || mainDisplay.innerHTML == "0" || lastEnteredType == "equals") {
 		mainDisplay.innerHTML = digit;
+
+		if (lastEnteredType == "equals") {
+			smallDisplay.innerHTML = "";
+		}
 	} else {
 		mainDisplay.innerHTML += digit;
 	}
@@ -47,6 +54,8 @@ function operatorPressed(operator) {
 	// then write to screen
 	mainDisplay.innerHTML = currentValue;
 	smallDisplay.innerHTML += keyPressed;
+
+	hasDecimalPoint = false;
 }
 
 
@@ -58,8 +67,9 @@ function equalsPressed() {
 	let currentValue = eval(smallDisplay.innerHTML);
 
 	mainDisplay.innerHTML = currentValue;
-	smallDisplay.innerHTML = currentValue;
+	//smallDisplay.innerHTML = currentValue;
 
+	hasDecimalPoint = false;
 }
 
 
@@ -68,8 +78,14 @@ function pointPressed() {
 	if (hasDecimalPoint) {
 		return;
 	} else {
-		mainDisplay.innerHTML += ".";
-		smallDisplay.innerHTML += ".";
+		if (lastEnteredType == "digit") {
+			mainDisplay.innerHTML += ".";
+			smallDisplay.innerHTML += ".";
+		} else {
+			mainDisplay.innerHTML = "0.";
+			smallDisplay.innerHTML = "0.";
+		}
+
 		hasDecimalPoint = true;
 	}
 
@@ -161,6 +177,6 @@ function doCalcStuff(e) {
 
 	lastEntered = keyPressed;
 	lastEnteredType = keyType;
-	console.log(lastEnteredType);
+	//console.log(lastEnteredType);
 
 }

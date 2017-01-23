@@ -3,6 +3,8 @@ $displayBackgroundNumbers: #999;
 $displayNumbers: #111;
 $displayFont: DSEG;
 $smallFont: "DotMatrix";
+$diplayFontSize: 20px;
+$smallFontSize: 15px;
 $buttonColor: #333;
 $buttonTextColor: #eee;
 $calculatorColor: #555;
@@ -21,8 +23,15 @@ $calculatorColor: #555;
 }
 
 .calculator {
+	position: absolute;
 	max-width: 300px;
+	min-height: 410px;
 	background-color: $calculatorColor;
+	border-radius: 10px;
+}
+
+.keyboard {
+	padding: 10px 20px;
 }
 
 
@@ -57,20 +66,29 @@ $calculatorColor: #555;
 
 // display
 .display {
+	position: relative;
 	max-width: 280px;
 	min-height: 60px;
+	padding: 5px;
+	margin: 10px 10px;
 	background-color: $displayBackground;
+	border-radius: 3px;
 	p {
+		margin: 0;
 		text-align: right;
 	}
 }
 
 .main-display {
+	height: 40px;
 	font-family: $displayFont;
+	font-size: $diplayFontSize;
 }
 
 .small-display {
+	height: 20px;
 	font-family: $smallFont;
+	font-size: $smallFontSize;
 }
 
 

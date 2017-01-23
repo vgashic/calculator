@@ -10,8 +10,14 @@
   box-sizing: border-box; }
 
 .calculator {
+  position: absolute;
   max-width: 300px;
-  background-color: #555; }
+  min-height: 410px;
+  background-color: #555;
+  border-radius: 10px; }
+
+.keyboard {
+  padding: 10px 20px; }
 
 .btn {
   display: inline-block;
@@ -38,14 +44,23 @@
   min-width: 114px; }
 
 .display {
+  position: relative;
   max-width: 280px;
   min-height: 60px;
-  background-color: #aaa; }
+  padding: 5px;
+  margin: 10px 10px;
+  background-color: #aaa;
+  border-radius: 3px; }
   .display p {
+    margin: 0;
     text-align: right; }
 
 .main-display {
-  font-family: DSEG; }
+  height: 40px;
+  font-family: DSEG;
+  font-size: 20px; }
 
 .small-display {
-  font-family: "DotMatrix"; }
+  height: 20px;
+  font-family: "DotMatrix";
+  font-size: 15px; }

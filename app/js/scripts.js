@@ -26,19 +26,35 @@ var lastEntered;
 var lastEnteredType;
 
 
-function digitPressed(digit) {
-	if (lastEnteredType == "operator" || mainDisplay.innerHTML == "0" || lastEnteredType == "equals") {
-		mainDisplay.innerHTML = digit;
+function calculateExpression(expr) {
+	let result;
 
-		if (lastEnteredType == "equals") {
-			smallDisplay.innerHTML = "";
-		}
+	if (expr.toString().length <= mainDisplayLimit) {
+		result = eval(expr).toString();
 	} else {
-		mainDisplay.innerHTML += digit;
+		// todo: implement display limit
+		result = "err";
 	}
 
-	if (!(mainDisplay.innerHTML == "0" && digit == "0" && lastEntered == "0")) {
-		smallDisplay.innerHTML += digit;
+	return result;
+}
+
+
+function digitPressed(digit) {
+	if (mainDisplay.innerHTML.replace(".", "").replace("-", "").length < mainDisplayLimit) {
+		if (lastEnteredType == "operator" || mainDisplay.innerHTML == "0" || lastEnteredType == "equals") {
+			mainDisplay.innerHTML = digit;
+
+			if (lastEnteredType == "equals") {
+				smallDisplay.innerHTML = "";
+			}
+		} else {
+			mainDisplay.innerHTML += digit;
+		}
+
+		if (!(mainDisplay.innerHTML == "0" && digit == "0" && lastEntered == "0")) {
+			smallDisplay.innerHTML += digit;
+		}
 	}
 }
 
@@ -49,7 +65,7 @@ function operatorPressed(operator) {
 	}
 
 	// first calculate expression in small display
-	let currentValue = eval(smallDisplay.innerHTML);
+	let currentValue = calculateExpression(smallDisplay.innerHTML);
 
 	// then write to screen
 	mainDisplay.innerHTML = currentValue;
@@ -64,7 +80,7 @@ function equalsPressed() {
 		smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -1);
 	}
 
-	let currentValue = eval(smallDisplay.innerHTML);
+	let currentValue = calculateExpression(smallDisplay.innerHTML);
 
 	mainDisplay.innerHTML = currentValue;
 	//smallDisplay.innerHTML = currentValue;

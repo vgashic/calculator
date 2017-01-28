@@ -24,183 +24,222 @@ var smallDisplayValue = smallDisplay.innerHTML;
 var keyPressed;
 var lastEntered;
 var lastEnteredType;
+var lastEnteredOperator = "";
 var expressionToDisplay;
-var expressionToCalculate;
+var expressionToCalculate = "(";
 
 
 function calculateExpression(expr) {
-    let result;
 
-    if (expr.toString().length <= mainDisplayLimit) {
-        result = eval(expr).toString();
-    } else {
-        // todo: implement display limit
-        result = "err";
-    }
+	let result = eval(createExpression(expr)).toString();
+	let fl = parseFloat(result);
 
-    return result;
+	if (result.replace(".", "").replace("-", "").length <= mainDisplayLimit) {
+		return result;
+	} else {
+		result = fl.toExponential(mainDisplayLimit - 5).toString();
+	}
+
+	return result;
 }
 
 
 function digitPressed(digit) {
-    if (mainDisplay.innerHTML.replace(".", "").replace("-", "").length < mainDisplayLimit) {
-        if (lastEnteredType == "operator" || mainDisplay.innerHTML == "0" || lastEnteredType == "equals") {
-            mainDisplay.innerHTML = digit;
+	if (mainDisplay.innerHTML.replace(".", "").replace("-", "").length <= mainDisplayLimit) {
+		if (lastEnteredType == "operator" || mainDisplay.innerHTML == "0" || lastEnteredType == "equals") {
+			mainDisplay.innerHTML = digit;
 
-            if (lastEnteredType == "equals") {
-                smallDisplay.innerHTML = "";
-            }
-        } else {
-            mainDisplay.innerHTML += digit;
-        }
+			if (lastEnteredType == "equals") {
+				smallDisplay.innerHTML = "";
+			}
+		} else {
+			mainDisplay.innerHTML += digit;
+		}
 
-        if (!(mainDisplay.innerHTML == "0" && digit == "0" && lastEntered == "0")) {
-            smallDisplay.innerHTML += digit;
-        }
-    }
+		if (!(mainDisplay.innerHTML == "0" && digit == "0" && lastEntered == "0")) {
+			smallDisplay.innerHTML += digit;
+			expressionToCalculate += digit;
+		}
+
+	}
 }
 
 
 function operatorPressed(operator) {
-    if (lastEnteredType == "operator") {
-        smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -1);
-    }
+	if (lastEnteredType == "operator") {
+		smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -1);
+	}
 
-    // first calculate expression in small display
-    let currentValue = calculateExpression(smallDisplay.innerHTML);
+	// first calculate expression in small display
+	let currentValue = calculateExpression(smallDisplay.innerHTML);
 
-    // then write to screen
-    mainDisplay.innerHTML = currentValue;
-    smallDisplay.innerHTML += keyPressed;
 
-    hasDecimalPoint = false;
+	// then write to screen
+	mainDisplay.innerHTML = currentValue;
+	smallDisplay.innerHTML += keyPressed;
+
+	hasDecimalPoint = false;
+	lastEnteredOperator = keyPressed;
 }
 
 
 function equalsPressed() {
-    if (lastEnteredType == "operator") {
-        smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -1);
-    }
+	if (lastEnteredType == "operator") {
+		smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -1);
+	}
 
-    let currentValue = calculateExpression(smallDisplay.innerHTML);
+	let currentValue = calculateExpression(smallDisplay.innerHTML);
 
-    mainDisplay.innerHTML = currentValue;
-    //smallDisplay.innerHTML = currentValue;
+	mainDisplay.innerHTML = currentValue;
+	//smallDisplay.innerHTML = currentValue;
 
-    hasDecimalPoint = false;
+	hasDecimalPoint = false;
 }
 
 
 
 function pointPressed() {
-    if (hasDecimalPoint) {
-        return;
-    } else {
-        if (lastEnteredType == "digit") {
-            mainDisplay.innerHTML += ".";
-            smallDisplay.innerHTML += ".";
-        } else {
-            mainDisplay.innerHTML = "0.";
-            smallDisplay.innerHTML = "0.";
-        }
+	if (hasDecimalPoint) {
+		return;
+	} else {
+		if (lastEnteredType == "digit") {
+			mainDisplay.innerHTML += ".";
+			smallDisplay.innerHTML += ".";
+		} else {
+			mainDisplay.innerHTML = "0.";
+			smallDisplay.innerHTML = "0.";
+		}
 
-        hasDecimalPoint = true;
-    }
+		hasDecimalPoint = true;
+	}
 
 }
 
 
 
 function commandPressed(cmd) {
-    switch (cmd) {
-        case "clearAll":
-            {
-                mainDisplay.innerHTML = "0";
-                smallDisplay.innerHTML = "0";
-                newCalc = true;
-                hasDecimalPoint = false;
-                break;
-            }
-        case "clearCurrent":
-            {
-                let numberOnDisplay = mainDisplay.innerHTML;
-                smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -numberOnDisplay.length);
+	switch (cmd) {
+		case "clearAll":
+			{
+				mainDisplay.innerHTML = "0";
+				smallDisplay.innerHTML = "0";
+				newCalc = true;
+				hasDecimalPoint = false;
+				break;
+			}
+		case "clearCurrent":
+			{
+				let numberOnDisplay = mainDisplay.innerHTML;
+				smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -numberOnDisplay.length);
 
-                mainDisplay.innerHTML = "0";
-                hasDecimalPoint = false;
-            }
-        default:
-            break;
-    }
+				mainDisplay.innerHTML = "0";
+				hasDecimalPoint = false;
+			}
+		default:
+			break;
+	}
+}
+
+
+function createExpression(expr) {
+	let arr = [...expr];
+	let result = "(0";
+	let numbers = "0123456789";
+	let prevOperator = "";
+
+
+	for (var i = 0; i < arr.length; i++) {
+
+		if (numbers.indexOf(arr[i]) > -1) {
+			result += arr[i];
+		} else {
+			if ("/*".indexOf(arr[i]) > -1 && "+-".indexOf(prevOperator) > -1) {
+				result += `)${arr[i]}`;
+			} else if ("+-".indexOf(arr[i]) > -1 && "*/".indexOf(prevOperator) > -1 && prevOperator != "") {
+				result += `${arr[i]}(`;
+			} else {
+				result += arr[i];
+			}
+
+			prevOperator = arr[i];
+		}
+	}
+
+	if ("+-".indexOf(prevOperator) > -1) {
+		result += ")";
+	}
+
+	return result;
 }
 
 
 
 function doCalcStuff(e) {
 
-    keyPressed = this.dataset.calc;
-    keyType = this.dataset.type;
+	keyPressed = this.dataset.calc;
+	keyType = this.dataset.type;
 
-    // console.log(this.dataset.calc);
-    if (newCalc) {
+	// console.log(this.dataset.calc);
+	if (newCalc) {
 
-        switch (keyType) {
+		switch (keyType) {
 
-            case "digit":
-                {
-                    mainDisplay.innerHTML = keyPressed;
-                    smallDisplay.innerHTML = keyPressed;
-                    break;
-                }
+			case "digit":
+				{
+					mainDisplay.innerHTML = keyPressed;
+					smallDisplay.innerHTML = keyPressed;
+					break;
+				}
 
-            case "point":
-                {
-                    mainDisplay.innerHTML += keyPressed;
-                    smallDisplay.innerHTML += keyPressed;
-                    hasDecimalPoint = true;
-                    break;
-                }
+			case "point":
+				{
+					mainDisplay.innerHTML += keyPressed;
+					smallDisplay.innerHTML += keyPressed;
+					hasDecimalPoint = true;
+					break;
+				}
 
-            case "operator":
-                {
-                    smallDisplay.innerHTML += keyPressed;
-                    break;
-                }
+			case "operator":
+				{
+					smallDisplay.innerHTML += keyPressed;
+					break;
+				}
 
-            default:
-                {
-                    break;
-                }
+			default:
+				{
+					break;
+				}
 
-        }
+		}
 
 
-        newCalc = false;
+		newCalc = false;
 
-    } else {
-        switch (keyType) {
-            case "digit":
-                digitPressed(keyPressed);
-                break;
-            case "operator":
-                operatorPressed(keyPressed);
-                break;
-            case "equals":
-                equalsPressed();
-                break;
-            case "point":
-                pointPressed();
-                break;
-            case "command":
-                commandPressed(keyPressed);
-                break;
-            default:
-                break;
-        }
-    }
+	} else {
+		switch (keyType) {
+			case "digit":
+				digitPressed(keyPressed);
+				break;
+			case "operator":
+				operatorPressed(keyPressed);
+				break;
+			case "equals":
+				equalsPressed();
+				break;
+			case "point":
+				pointPressed();
+				break;
+			case "command":
+				commandPressed(keyPressed);
+				break;
+			default:
+				break;
+		}
+	}
 
-    lastEntered = keyPressed;
-    lastEnteredType = keyType;
-    //console.log(lastEnteredType);
+	lastEntered = keyPressed;
+	lastEnteredType = keyType;
+	lastEnteredOperator = (keyType == "operator") ? keyPressed : lastEnteredOperator;
+	//console.log(lastEnteredType);
 
 }

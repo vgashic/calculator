@@ -1,5 +1,5 @@
 // display limits
-const mainDisplayLimit = 15;
+const mainDisplayLimit = 11;
 const smallDisplayLimit = 25;
 
 // get all buttons into array
@@ -27,6 +27,7 @@ var lastEnteredType;
 var lastEnteredOperator = "";
 var expressionToDisplay;
 var expressionToCalculate = "(";
+var cePressed = 0;
 
 
 function calculateExpression(expr) {
@@ -129,11 +130,19 @@ function commandPressed(cmd) {
 			}
 		case "clearCurrent":
 			{
-				let numberOnDisplay = mainDisplay.innerHTML;
-				smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -numberOnDisplay.length);
+				cePressed++;
 
-				mainDisplay.innerHTML = "0";
-				hasDecimalPoint = false;
+				if (cePressed == 1) {
+
+					let numberOnDisplay = mainDisplay.innerHTML;
+					smallDisplay.innerHTML = smallDisplay.innerHTML.slice(0, -numberOnDisplay.length);
+
+					mainDisplay.innerHTML = "0";
+					hasDecimalPoint = false;
+				} else {
+					cePressed = 0;
+					commandPressed("clearAll");
+				}
 			}
 		default:
 			break;

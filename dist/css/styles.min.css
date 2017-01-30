@@ -10,8 +10,7 @@
   box-sizing: border-box; }
 
 body {
-  background-image: url("../img/wood.png");
-  overflow: hidden; }
+  background-image: url("../img/wood.png"); }
 
 .calculator {
   position: absolute;

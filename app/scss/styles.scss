@@ -134,3 +134,19 @@ body {
 	font-family: $smallFont;
 	font-size: $smallFontSize;
 }
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	p {
+		display: block;
+		text-align: center;
+		font-family: $smallFont;
+		color: white;
+	}
+	a {
+		text-decoration: none;
+		color: white;
+	}
+}

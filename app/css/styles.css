@@ -104,3 +104,16 @@ body {
   height: 20px;
   font-family: "DotMatrix";
   font-size: 15px; }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%; }
+  footer p {
+    display: block;
+    text-align: center;
+    font-family: "DotMatrix";
+    color: white; }
+  footer a {
+    text-decoration: none;
+    color: white; }

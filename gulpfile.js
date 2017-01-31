@@ -42,12 +42,27 @@ gulp.task("fonts", function () {
 		.pipe(gulp.dest("dist/fonts"));
 });
 
+gulp.task("js", function () {
+	return gulp.src("app/js/**/*")
+		.pipe(gulp.dest("dist/js"));
+});
+
+gulp.task("css", function () {
+	return gulp.src("app/css/**/*")
+		.pipe(gulp.dest("dist/css"));
+});
+
+gulp.task("html", function () {
+	return gulp.src("app/*.html")
+		.pipe(gulp.dest("dist"));
+});
+
 
 gulp.task("clean:dist", function () {
 	return del.sync("dist");
 });
 
 gulp.task("build", function (callback) {
-	runSeq("clean:dist", ["sass", "useref", "images", "fonts"],
+	runSeq("clean:dist", ["sass", "css", "js", "html", "images", "fonts"],
 		callback)
 });

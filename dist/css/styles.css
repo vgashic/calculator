@@ -1,0 +1,119 @@
+@font-face {
+  font-family: "DSEG";
+  src: url("../fonts/DSEG7Classic-Bold.woff"); }
+
+@font-face {
+  font-family: DotMatrix;
+  src: url("../fonts/dotmatrixnormal.ttf"); }
+
+* {
+  box-sizing: border-box; }
+
+body {
+  background-image: url("../img/wood.png");
+  overflow: hidden; }
+
+.calculator {
+  position: absolute;
+  max-width: 320px;
+  min-height: 410px;
+  padding: 10px;
+  background-color: #555;
+  border-radius: 15px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 5px 8px 20px 1px rgba(0, 0, 0, 0.5), inset -1px -6px 12px 0.1px #333; }
+
+.keyboard {
+  padding: 10px 20px; }
+
+.btn {
+  display: inline-block;
+  min-width: 50px;
+  min-height: 50px;
+  max-width: 50px;
+  max-height: 50px;
+  margin: 5px;
+  font-size: 25px;
+  color: #eee;
+  background-color: #333;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  box-shadow: 0px 3px 0px 0px #222121; }
+
+.btn-red {
+  background-color: darkred;
+  box-shadow: 0px 3px 0px 0px #671c2a; }
+
+.double-height {
+  position: absolute;
+  min-height: 110px; }
+
+.double-width {
+  min-width: 114px; }
+
+.above {
+  font-size: 0; }
+
+.logo {
+  display: inline-block;
+  height: 50px;
+  width: 120px;
+  margin-left: 10px;
+  background-image: url("../img/free-code-camp-logo.svg");
+  background-size: 50px;
+  background-repeat: no-repeat;
+  background-position-y: 80%;
+  background-position-x: 30%; }
+
+.solar-panel {
+  display: inline-block;
+  width: 160px;
+  height: 50px;
+  margin-right: 10px; }
+
+.solar-panel__cell {
+  display: inline-block;
+  background-color: #886C69;
+  width: 40px;
+  height: 40px;
+  margin-top: 5px;
+  border: 1px solid #9F928C; }
+
+.display {
+  position: relative;
+  max-width: 280px;
+  min-height: 60px;
+  padding: 5px;
+  margin: 10px 10px;
+  background-color: #aaa;
+  border-radius: 3px;
+  border: 2px solid #888; }
+  .display p {
+    margin: 0;
+    text-align: right; }
+
+.main-display {
+  height: 40px;
+  font-family: DSEG;
+  font-size: 25px; }
+
+.small-display {
+  height: 20px;
+  font-family: "DotMatrix";
+  font-size: 15px; }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%; }
+  footer p {
+    display: block;
+    text-align: center;
+    font-family: "DotMatrix";
+    color: white; }
+  footer a {
+    text-decoration: none;
+    color: white; }

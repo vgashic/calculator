@@ -32,8 +32,9 @@ var cePressed = 0;
 
 function calculateExpression(expr) {
 
-	let result = eval(createExpression(expr)).toString();
-	let fl = parseFloat(result);
+	let num = eval(createExpression(expr));
+	let result = num.toString();
+	let fl = parseFloat(num);
 
 	if (result.replace(".", "").replace("-", "").length <= mainDisplayLimit) {
 		return result;
@@ -143,6 +144,7 @@ function commandPressed(cmd) {
 					cePressed = 0;
 					commandPressed("clearAll");
 				}
+				break;
 			}
 		default:
 			break;
@@ -153,7 +155,7 @@ function commandPressed(cmd) {
 function createExpression(expr) {
 	let arr = [...expr];
 	let result = "(0";
-	let numbers = "0123456789";
+	let numbers = "0123456789.";
 	let prevOperator = "";
 
 
@@ -178,6 +180,7 @@ function createExpression(expr) {
 		result += ")";
 	}
 
+	console.log(result);
 	return result;
 }
 

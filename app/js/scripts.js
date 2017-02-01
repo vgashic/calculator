@@ -104,12 +104,27 @@ function pointPressed() {
 	if (hasDecimalPoint) {
 		return;
 	} else {
-		if (lastEnteredType == "digit") {
-			mainDisplay.innerHTML += ".";
-			smallDisplay.innerHTML += ".";
-		} else {
-			mainDisplay.innerHTML = "0.";
-			smallDisplay.innerHTML = "0.";
+		switch (lastEnteredType) {
+			case "digit":
+				{
+					mainDisplay.innerHTML += ".";
+					smallDisplay.innerHTML += ".";
+					break;
+				}
+
+			case "operator":
+				{
+					mainDisplay.innerHTML = "0.";
+					smallDisplay.innerHTML += "0.";
+					break;
+				}
+
+			default:
+				{
+					mainDisplay.innerHTML = "0.";
+					smallDisplay.innerHTML = "0.";
+					break;
+				}
 		}
 
 		hasDecimalPoint = true;
@@ -154,7 +169,7 @@ function commandPressed(cmd) {
 
 function createExpression(expr) {
 	let arr = [...expr];
-	let result = "(0";
+	let result = "(";
 	let numbers = "0123456789.";
 	let prevOperator = "";
 
@@ -180,7 +195,7 @@ function createExpression(expr) {
 		result += ")";
 	}
 
-	console.log(result);
+	//console.log(result);
 	return result;
 }
 

@@ -29,16 +29,21 @@ var expressionToDisplay;
 var expressionToCalculate = "(";
 var cePressed = 0;
 
+Decimal12 = Decimal.clone({
+	precision: 12
+});
+
 
 function calculateExpression(expr) {
 
-	let num = eval(createExpression(expr));
-	let result = num.toString();
+	let num = new Decimal12(eval(createExpression(expr)));
+	let result = num.plus(0).toString();
 	let fl = parseFloat(num);
 
-	if (result.replace(".", "").replace("-", "").length <= mainDisplayLimit) {
-		return result;
-	} else {
+	//console.log(num);
+	console.log(result);
+
+	if (num > Math.pow(10, mainDisplayLimit + 1)) {
 		result = fl.toExponential(mainDisplayLimit - 5).toString();
 	}
 
@@ -195,7 +200,7 @@ function createExpression(expr) {
 		result += ")";
 	}
 
-	//console.log(result);
+	console.log(result);
 	return result;
 }
 

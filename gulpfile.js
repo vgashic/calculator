@@ -57,12 +57,17 @@ gulp.task("html", function () {
 		.pipe(gulp.dest("dist"));
 });
 
+gulp.task("decimal", function () {
+	return gulp.src("node_modules/decimal.js/decimal.min.js")
+		.pipe(gulp.dest("dist/js"));
+})
+
 
 gulp.task("clean:dist", function () {
 	return del.sync("dist");
 });
 
 gulp.task("build", function (callback) {
-	runSeq("clean:dist", ["sass", "css", "js", "html", "images", "fonts"],
+	runSeq("clean:dist", ["sass", "css", "js", "decimal", "html", "images", "fonts"],
 		callback)
 });

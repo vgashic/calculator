@@ -1,5 +1,5 @@
 // display limits
-const mainDisplayLimit = 11;
+const mainDisplayLimit = 12;
 const smallDisplayLimit = 25;
 
 // get all buttons into array
@@ -41,7 +41,7 @@ function calculateExpression(expr) {
 	let fl = parseFloat(num);
 
 	//console.log(num);
-	console.log(result);
+	//console.log(result);
 
 	if (num > Math.pow(10, mainDisplayLimit + 1)) {
 		result = fl.toExponential(mainDisplayLimit - 5).toString();
@@ -52,12 +52,16 @@ function calculateExpression(expr) {
 
 
 function digitPressed(digit) {
-	if (mainDisplay.innerHTML.replace(".", "").replace("-", "").length <= mainDisplayLimit) {
+	console.log(lastEnteredType);
+	console.log(mainDisplay.innerHTML.replace(".", "").replace("-", "").length);
+
+	if (mainDisplay.innerHTML.replace(".", "").replace("-", "").length + 1 <= mainDisplayLimit || lastEnteredType == "operator") {
+		console.log("im here");
 		if (lastEnteredType == "operator" || mainDisplay.innerHTML == "0" || lastEnteredType == "equals") {
 			mainDisplay.innerHTML = digit;
 
 			if (lastEnteredType == "equals") {
-				smallDisplay.innerHTML = "";
+				smallDisplay.innerHTML = digit;
 			}
 		} else {
 			mainDisplay.innerHTML += digit;
@@ -177,6 +181,11 @@ function createExpression(expr) {
 	let result = "(";
 	let numbers = "0123456789.";
 	let prevOperator = "";
+	let operators = "+-/*";
+
+	if (operators.indexOf(arr[arr.length - 1]) > -1) {
+		arr.pop();
+	}
 
 
 	for (var i = 0; i < arr.length; i++) {

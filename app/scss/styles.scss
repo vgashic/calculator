@@ -110,7 +110,7 @@ body {
 // display
 .display {
 	position: relative;
-	max-width: 280px;
+	max-width: 279px;
 	min-height: 60px;
 	padding: 5px;
 	margin: 10px 10px;
@@ -129,10 +129,18 @@ body {
 	font-size: $diplayFontSize;
 }
 
+.small-display-wrapper {
+	height: 20px;
+	text-align: right;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
 .small-display {
 	height: 20px;
 	font-family: $smallFont;
 	font-size: $smallFontSize;
+	float: right;
 }
 
 footer {
